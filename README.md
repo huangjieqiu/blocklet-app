@@ -3,7 +3,8 @@
 这是一个[BlockletApp](https://github.com/blocklet/create-blocklet)项目.
 
 使用的技术栈包括 vue,less,axios
-运行npm run serve启动项目 npm run build构建项目
+运行npm run serve启动项目
+ npm run build构建项目
 ## File Structure
 
 - public/ - static files
