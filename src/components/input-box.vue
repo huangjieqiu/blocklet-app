@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     enterPress(eEvent) {
-      if (this.isMobile || this.disable) return;
+      if (this.disable) return;
       if (window.event) {
         eEvent = window.event;
       }

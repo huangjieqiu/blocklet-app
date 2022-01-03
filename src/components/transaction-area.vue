@@ -1,5 +1,5 @@
 <template>
-  <div class="transaction-area">
+  <div class="transaction-area" ref="transactionArea">
     <div class="transaction-container">
       <m-header
         title="Transactions"
@@ -8,7 +8,7 @@
       <div class="transaction-item" v-for="item in currentData" :key="item.hash">
         <flex-box leftContent="Fee" :rightContent="item.fee"></flex-box>
 
-        <flex-box :leftContent="isMobile ? 'Amount' : ''" :rightContent="item.amount"> </flex-box>
+        <flex-box leftContent="Size" :rightContent="item.size"> </flex-box>
 
         <flex-box heightLight leftContent="Hash" :rightContent="item.hashArray"></flex-box>
 
@@ -36,23 +36,24 @@
         </flex-box>
       </div>
     </div>
-    <pagination
+    <pagination-box
       :total="data.length"
       :currentPage="page.currentPage"
       :pageSize="page.pageSize"
       @change="pagination"
-    ></pagination>
+      :scrollPosY="offsetTop"
+    ></pagination-box>
   </div>
 </template>
 
 <script>
 import FlexBox from 'common/flex-box';
 import MHeader from 'common/m-header';
-import Pagination from 'common/pagination';
+import PaginationBox from 'common/pagination-box';
 export default {
   components: {
     FlexBox,
-    Pagination,
+    PaginationBox,
     MHeader,
   },
   name: 'transaction-area',
@@ -75,7 +76,11 @@ export default {
         pageSize: 5,
         total: 0,
       },
+      offsetTop: 0,
     };
+  },
+  mounted() {
+    this.offsetTop = this.$refs.transactionArea.offsetTop;
   },
   computed: {
     currentData() {
@@ -99,11 +104,11 @@ export default {
         return {
           hash: item.hash,
           hashArray: [{ main: item.hash }],
-          amount: [{ main: item.size }],
+          size: [{ main: item.size }],
           date: [{ main: this.getDate(item.time) }],
           fee,
-          out: item.out.map((a) => ({ main: a.script, aside: '$' + a.value })),
-          inputs: item.inputs.map((a) => ({ main: a.script, aside: '$' + a.prev_out.value })),
+          out: item.out.map((a) => ({ main: a.script, aside: 'value: ' + a.value })),
+          inputs: item.inputs.map((a) => ({ main: a.script, aside: 'value: ' + a.prev_out.value })),
         };
       });
     },

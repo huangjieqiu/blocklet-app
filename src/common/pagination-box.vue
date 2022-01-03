@@ -1,5 +1,5 @@
 <template>
-  <ul class="mo-paging">
+  <ul class="pagination-box">
     <!-- prev -->
     <li :class="['paging-item', 'paging-item--prev', { 'paging-item--disabled': index === 1 }]" @click="prev">prev</li>
 
@@ -34,10 +34,19 @@
 </template>
 
 <script>
+import { scrollTo } from '@/utils/scroll-to';
+
 export default {
-  name: 'MoPaging',
-  //通过props来接受从父组件传递过来的值
+  name: 'pagination-box',
   props: {
+    autoScroll: {
+      type: Boolean,
+      default: true,
+    },
+    scrollPosY: {
+      type: Number,
+      default: 0,
+    },
     //页面中的可见页码，其他的以...替代, 必须是奇数
     perPages: {
       type: Number,
@@ -88,6 +97,9 @@ export default {
         this.index = page;
         //父组件通过change方法来接受当前的页码
         this.$emit('change', this.index);
+        if (this.autoScroll) {
+          scrollTo(this.scrollPosY, 800);
+        }
       }
     },
   },
@@ -156,7 +168,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.mo-paging {
+.pagination-box {
   display: inline-block;
   width: 100%;
   white-space: nowrap;

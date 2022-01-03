@@ -3,6 +3,7 @@
 这是一个[BlockletApp](https://github.com/blocklet/create-blocklet)项目.
 
 使用的技术栈包括 vue,less,axios
+运行npm run serve启动项目 npm run build构建项目
 ## File Structure
 
 - public/ - static files
@@ -11,9 +12,10 @@
   - index.html - main html file, template for vue
 - screenshots/ - Screenshots
 - src/ - Client side code (A standard vue app structure)
-  - common - 用于存放公共组件
-  - components - 用于存放业务组件
-  - pages - 用于存放页面组件
+  - common - common components
+  - components - business components
+  - pages - page components
+  - utils - utils
 - .env - Environment variables
 - .env.local - Local environment variables
 - .eslintrc.js - ESLint configuration
