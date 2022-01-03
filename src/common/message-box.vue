@@ -136,7 +136,7 @@ export default {
       &:first-child {
         margin-right: 8px;
       }
-      &.primary {
+      &.button--primary {
         color: #fff;
         background-color: #409eff;
         border-color: #409eff;
