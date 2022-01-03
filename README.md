@@ -6,8 +6,8 @@
 
 运行npm run serve启动项目
 
- npm run build构建项目
- 
+运行npm run build构建项目
+
 ## File Structure
 
 - public/ - static files
